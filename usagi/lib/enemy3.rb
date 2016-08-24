@@ -1,7 +1,7 @@
 ﻿require_relative 'character'
 
 # 最短経路で1-3マスランダムで近づいてくる敵（赤）
-class Enemy2 < Character
+class Enemy3 < Character
   UPDATE_THRESHOLD = 40 # 40フレームごとに移動する（おそい）
 
   def initialize(cell_x, cell_y)
