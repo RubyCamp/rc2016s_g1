@@ -1,4 +1,4 @@
-require_relative 'dijkstra_search'
+﻿require_relative 'dijkstra_search'
 
 class Map
   # マップチップ毎の画像イメージ
@@ -28,6 +28,7 @@ class Map
   end
 
   def movable?(x, y)
+    return false if x < 0 || x >= @map_x_size || y < 0 || y >= @map_y_size
     return self[x,y] == 0
   end
 
