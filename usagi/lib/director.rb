@@ -23,7 +23,7 @@ class Director
     @characters = []
     @coins = []
     1.times do
-      point = [rand(1..18), rand(1..13)]
+      point = [rand(1..24), rand(1..16)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
          @coins.any?{|coin| [coin.cell_x, coin.cell_y] == point}
@@ -34,9 +34,9 @@ class Director
     @characters += @coins
     @enemies = []
     @enemies << Enemy.new(11,1)
-#    @enemies << Enemy2.new(11,1)
-#    @enemies << Enemy3.new(11,1)
-#    @enemies << Enemy4.new(11,1)
+    @enemies << Enemy2.new(11,1)
+    @enemies << Enemy3.new(11,1)
+    @enemies << Enemy4.new(11,1)
     @characters += @enemies
     @player = Player.new
     @characters << @player
