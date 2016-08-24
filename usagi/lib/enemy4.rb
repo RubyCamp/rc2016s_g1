@@ -1,16 +1,16 @@
 require_relative 'character'
 
-# ランダムに徘徊する敵（青）
+# ランダムに徘徊する敵（B）
 class Enemy4 < Character
   UPDATE_THRESHOLD = 30 # 30フレームごとに移動する（はやい）
-  KEEP_DEST_TURN = 7 # 移動先を更新するまでのターン数
+  KEEP_DEST_TURN = 4 # 移動先を更新するまでのターン数
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy4.png"))
     image.set_color_key(C_WHITE)
     super(cell_x , cell_y, image)
-    @count = 0
-    update_dest(true)
+    @count = UPDATE_THRESHOLD
+    @kept_turn = KEEP_DEST_TURN + 1
   end
 
   def update
@@ -28,12 +28,13 @@ class Enemy4 < Character
 
   def update_dest(force=false)
     if force || @kept_turn > KEEP_DEST_TURN
+      map = Director.instance.map
       loop do
-        dest_x = 2 * rand(2..9) + 1 # 5から19までの奇数のどれか
-        dest_y = 2 * rand(1..6) + 1  # 3から13までの奇数のどれか
+        dest_x = rand(1..18)
+        dest_y = rand(1..13)
         distance = (@cell_x - dest_x) ** 2 + (@cell_y - dest_y) ** 2
         # 立ち止まることが無い様に、移動先への距離が保持ターン数以上のセル数であることを確認
-        if distance >= KEEP_DEST_TURN ** 2
+        if map.movable?(dest_x, dest_y) && distance >= KEEP_DEST_TURN ** 2
           @dest = [dest_x, dest_y]
           break
         end
