@@ -34,9 +34,9 @@ class Director
     @characters += @coins
     @enemies = []
     @enemies << Enemy.new(11,1)
-#    @enemies << Enemy2.new(11,1)
-#    @enemies << Enemy3.new(11,1)
-#    @enemies << Enemy4.new(11,1)
+    @enemies << Enemy2.new(11,1)
+    @enemies << Enemy3.new(11,1)
+    @enemies << Enemy4.new(11,1)
     @characters += @enemies
     @player = Player.new
     @characters << @player
