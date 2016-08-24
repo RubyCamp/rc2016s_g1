@@ -1,8 +1,8 @@
-ï»¿require_relative 'character'
+require_relative 'character'
 
-# æœ€çŸ­çµŒè·¯ã§1-3ãƒã‚¹ãƒ©ãƒ³ãƒ€ãƒ ã§è¿‘ã¥ã„ã¦ãã‚‹æ•µï¼ˆèµ¤ï¼‰
+# Å’ZŒo˜H‚Å1-3ƒ}ƒXƒ‰ƒ“ƒ_ƒ€‚Å‹ß‚Ã‚¢‚Ä‚­‚é“GiÔj
 class Enemy3 < Character
-  UPDATE_THRESHOLD = 40 # 40ãƒ•ãƒ¬ãƒ¼ãƒ ã”ã¨ã«ç§»å‹•ã™ã‚‹ï¼ˆãŠãã„ï¼‰
+  UPDATE_THRESHOLD = 40 # 40ƒtƒŒ[ƒ€‚²‚Æ‚ÉˆÚ“®‚·‚éi‚¨‚»‚¢j
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy3.png"))
@@ -36,7 +36,7 @@ class Enemy3 < Character
       dx = dest[0] - @cell_x
       dy = dest[1] - @cell_y
 
-	  if dx != 0	#å„æ–¹å‘ã¸ã®ç§»å‹•
+	  if dx != 0	#Še•ûŒü‚Ö‚ÌˆÚ“®
 		  if  dx == 1
 		 	 for i in 0..rand_num
 				  if map.movable?(@cell_x + dx + i, @cell_y)
