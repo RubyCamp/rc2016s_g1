@@ -23,7 +23,7 @@ class Director
     @characters = []
     @coins = []
     10.times do
-      point = [rand(1..18), rand(1..13)]
+      point = [rand(1..25), rand(1..17)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
          @coins.any?{|coin| [coin.cell_x, coin.cell_y] == point}
