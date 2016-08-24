@@ -2,7 +2,7 @@ require_relative 'character'
 
 # ランダムに徘徊する敵（青）
 class Enemy4 < Character
-  UPDATE_THRESHOLD = 10 # 10フレームごとに移動する（はやい）
+  UPDATE_THRESHOLD = 30 # 30フレームごとに移動する（はやい）
   KEEP_DEST_TURN = 7 # 移動先を更新するまでのターン数
 
   def initialize(cell_x, cell_y)
