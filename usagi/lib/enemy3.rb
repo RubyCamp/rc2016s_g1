@@ -3,8 +3,6 @@
 # 最短経路で1-3マスランダムで近づいてくる敵（赤）
 class Enemy2 < Character
   UPDATE_THRESHOLD = 40 # 40フレームごとに移動する（おそい）
-  Move_x = 0
-  Move_y = 0
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy2.png"))
