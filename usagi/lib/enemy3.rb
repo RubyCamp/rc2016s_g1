@@ -1,11 +1,11 @@
 ﻿require_relative 'character'
 
 # 最短経路で1-3マスランダムで近づいてくる敵（赤）
-class Enemy2 < Character
+class Enemy3 < Character
   UPDATE_THRESHOLD = 40 # 40フレームごとに移動する（おそい）
 
   def initialize(cell_x, cell_y)
-    image = Image.load(image_path("enemy2.png"))
+    image = Image.load(image_path("enemy3.png"))
     image.set_color_key(C_WHITE)
     super(cell_x , cell_y, image)
     @count = 0
