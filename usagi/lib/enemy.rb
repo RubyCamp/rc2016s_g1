@@ -2,17 +2,18 @@ require_relative 'character'
 
 # 追いかけてくるけど、対角線上では待ち伏せする敵（緑）
 class Enemy < Character
-  UPDATE_THRESHOLD = 20 # 20フレームごとに移動する
+  UPDATE_THRESHOLD = 60 # 60フレームごとに移動する
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy.png"))
     image.set_color_key(C_WHITE)
     super(cell_x , cell_y, image)
     @count = 0
+    @update_threshold = UPDATE_THRESHOLD
   end
 
   def update
-    if @count < UPDATE_THRESHOLD
+    if @count < @update_threshold
       @count += 1
       return
     end
@@ -21,11 +22,16 @@ class Enemy < Character
     move
   end
 
+  def hit(obj)
+    if obj.is_a?(Coin)
+      @update_threshold = 120
+    end
+  end
+
   private
 
   # X軸とY軸でプレイヤーと距離が遠い方をしらべて、
   # その軸優先でプレイヤーの方向に移動する。
-  # 対角線上にいるときは移動しない。
   def move
     map = Director.instance.map
     player = Director.instance.player
@@ -33,20 +39,14 @@ class Enemy < Character
     player_dy = player.cell_y - @cell_y
     if player_dx.abs > player_dy.abs
       dx = player_dx / player_dx.abs
-      if map.movable?(@cell_x + dx, @cell_y)
         move_cell(dx: dx)
-      elsif !player_dy.zero?
-        dy = player_dy / player_dy.abs
-        move_cell(dy: dy) if map.movable?(@cell_x, @cell_y + dy)
-      end
     elsif player_dx.abs < player_dy.abs
       dy = player_dy / player_dy.abs
-      if map.movable?(@cell_x, @cell_y + dy)
         move_cell(dy: dy)
-      elsif !player_dx.zero?
-        dx = player_dx / player_dx.abs
-        move_cell(dx: dx) if map.movable?(@cell_x + dx, @cell_y)
-      end
+    else
+      dx = player_dx / player_dx.abs
+      dy = player_dy / player_dy.abs
+      move_cell(dx: dx,dy: dy)
     end
   end
 end
