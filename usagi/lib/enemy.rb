@@ -18,9 +18,7 @@ class Enemy < Character
       return
     end
     @count = 0
-
     item_time_judg
-
     move
   end
 
