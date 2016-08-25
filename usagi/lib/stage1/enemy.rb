@@ -1,4 +1,4 @@
-﻿require_relative 'character'
+require_relative 'character'
 
 # 壁を無視して追いかけてくる敵 (緑)
 class Enemy < Character
@@ -33,8 +33,8 @@ class Enemy < Character
   # X軸とY軸でプレイヤーと距離が遠い方をしらべて、
   # その軸優先でプレイヤーの方向に移動する。
   def move
-    map = Director.instance.map
-    player = Director.instance.player
+    map = Stage1::Director.instance.map
+    player = Stage1::Director.instance.player
     player_dx = player.cell_x - @cell_x
     player_dy = player.cell_y - @cell_y
     if player_dx.abs > player_dy.abs

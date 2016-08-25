@@ -1,14 +1,15 @@
-require 'singleton'
-require_relative 'map'
+﻿require 'singleton'
+require_relative '../common/map'
 require_relative 'info_window'
 require_relative 'player'
-require_relative 'item3'
 require_relative 'enemy'
 require_relative 'enemy2'
 require_relative 'enemy3'
 require_relative 'enemy4'
 require_relative 'coin'
+require_relative 'item3'
 
+module Stage1
 class Director
   include Singleton
   attr_reader :map, :player
@@ -16,15 +17,16 @@ class Director
   TIME_LIMIT = 60 # ゲーム終了までの秒数
 
   def initialize
+
     @start_time = Time.now
     @count = TIME_LIMIT
 
-    @map = Map.new(File.join(File.dirname(__FILE__), "..", "images", "map.dat"))
+    @map = Map.new(File.join(File.dirname(__FILE__), "..","..", "images", "map1.dat"), "map_chips1.png")
     @info_window = InfoWindow.new(@map.height, @count)
     @characters = []
     @coins = []
     1.times do
-      point = [rand(1..18), rand(1..13)]
+      point = [rand(1..24), rand(1..16)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
          @coins.any?{|coin| [coin.cell_x, coin.cell_y] == point}
@@ -34,10 +36,10 @@ class Director
     end
     @characters += @coins
     @enemies = []
-    @enemies << Enemy.new(11,1)
-    @enemies << Enemy2.new(11,1)
-    @enemies << Enemy3.new(11,1)
-    @enemies << Enemy4.new(11,1)
+    @enemies << Enemy.new(11,3)
+    @enemies << Enemy2.new(12,3)
+    @enemies << Enemy3.new(13,3)
+    @enemies << Enemy4.new(14,3)
     @characters += @enemies
     @player = Player.new
     @characters << @player
@@ -80,4 +82,5 @@ class Director
       sprites.reject!{|sprite| sprite.vanished? }
     end
   end
+end
 end
