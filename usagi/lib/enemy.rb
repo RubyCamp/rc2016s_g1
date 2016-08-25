@@ -1,6 +1,6 @@
 ﻿require_relative 'character'
 
-# 追ぁE��けてくるけど、対角線上では征E��伏せする敵�E�緑！E
+# 壁を無視して追いかけてくる敵 (緑)
 class Enemy < Character
   UPDATE_THRESHOLD = 60 # 60フレームごとに移動する
 
@@ -23,9 +23,6 @@ class Enemy < Character
   end
 
   def hit(obj)
-    if obj.is_a?(Coin)
-      @update_threshold = 120
-    end
     if obj.is_a?(Item3)
       vanish
     end
