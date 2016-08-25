@@ -10,7 +10,7 @@ class Player < Character
     @life = 3
     @score = 0
     $item_time = 1
-    $item_start_time = 0
+    $item_get_time = 0
   end
 
   def update
@@ -26,7 +26,7 @@ class Player < Character
   def shot(obj)
     @score += 1
     $item_time = 3
-    $item_start_time = Time.now
+    $item_get_time = Time.now
   end
 
   # 敵に当たったとぁE

@@ -49,7 +49,7 @@
   end
 
   def item_time_judg #アイテムの効果時間判定
-     time_x = (Time.now - $item_start_time).to_i 
+     time_x = (Time.now - $item_get_time).to_i 
      if time_x > 2 
  	$item_time = 1 
      end 
