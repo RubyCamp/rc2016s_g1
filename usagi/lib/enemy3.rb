@@ -21,7 +21,7 @@ class Enemy3 < Character
     move
   end
  def hit(obj)
-  if obj.is_a?(item3)
+  if obj.is_a?(Item3)
     vanish
   end
  end

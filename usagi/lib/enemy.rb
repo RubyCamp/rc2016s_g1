@@ -26,7 +26,7 @@ class Enemy < Character
     if obj.is_a?(Coin)
       @update_threshold = 120
     end
-    if obj.is_a?(item3)
+    if obj.is_a?(Item3)
       vanish
     end
   end

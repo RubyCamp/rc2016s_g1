@@ -2,6 +2,7 @@ require 'singleton'
 require_relative 'map'
 require_relative 'info_window'
 require_relative 'player'
+require_relative 'item3'
 require_relative 'enemy'
 require_relative 'enemy2'
 require_relative 'enemy3'
@@ -23,7 +24,7 @@ class Director
     @characters = []
     @coins = []
     1.times do
-      point = [rand(1..24), rand(1..16)]
+      point = [rand(1..18), rand(1..13)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
          @coins.any?{|coin| [coin.cell_x, coin.cell_y] == point}
