@@ -12,7 +12,7 @@ class Enemy3 < Character
   end
 
   def update
-    if @count < UPDATE_THRESHOLD * $Item_time
+    if @count < UPDATE_THRESHOLD * $item_time
       @count += 1
       return
     end
@@ -20,7 +20,11 @@ class Enemy3 < Character
     item_time_judg
     move
   end
-
+ def hit(obj)
+  if obj.is_a?(Item3)
+    vanish
+  end
+ end
   private
 
   def move

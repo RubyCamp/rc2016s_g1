@@ -2,6 +2,7 @@ require 'singleton'
 require_relative 'map'
 require_relative 'info_window'
 require_relative 'player'
+require_relative 'item3'
 require_relative 'enemy'
 require_relative 'enemy2'
 require_relative 'enemy3'
@@ -12,7 +13,7 @@ class Director
   include Singleton
   attr_reader :map, :player
 
-  TIME_LIMIT = 30 # ゲーム終了までの秒数
+  TIME_LIMIT = 60 # ゲーム終了までの秒数
 
   def initialize
     @start_time = Time.now
@@ -22,8 +23,8 @@ class Director
     @info_window = InfoWindow.new(@map.height, @count)
     @characters = []
     @coins = []
-    10.times do
-      point = [rand(1..25), rand(1..17)]
+    1.times do
+      point = [rand(1..18), rand(1..13)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
          @coins.any?{|coin| [coin.cell_x, coin.cell_y] == point}
@@ -33,9 +34,9 @@ class Director
     end
     @characters += @coins
     @enemies = []
-#    @enemies << Enemy.new(11,1)
+    @enemies << Enemy.new(11,1)
     @enemies << Enemy2.new(11,1)
-#    @enemies << Enemy3.new(11,1)
+    @enemies << Enemy3.new(11,1)
     @enemies << Enemy4.new(11,1)
     @characters += @enemies
     @player = Player.new
@@ -54,6 +55,8 @@ class Director
 
     @map.draw
     @info_window.draw
+    Sprite.check(@coins, @enemies)
+    Sprite.check(@enemys,@item3)
     Sprite.draw(@characters)
   end
 

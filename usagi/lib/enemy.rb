@@ -1,6 +1,6 @@
 ﻿require_relative 'character'
 
-# 追いかけてくるけど、対角線上では待ち伏せする敵（緑）
+# 追ぁE��けてくるけど、対角線上では征E��伏せする敵�E�緑！E
 class Enemy < Character
   UPDATE_THRESHOLD = 60 # 60フレームごとに移動する
 
@@ -13,19 +13,21 @@ class Enemy < Character
   end
 
   def update
-    if @count < @update_threshold * $Item_time
+    if @count < @update_threshold * $item_time
       @count += 1
       return
     end
     @count = 0
     item_time_judg
-
     move
   end
 
   def hit(obj)
     if obj.is_a?(Coin)
       @update_threshold = 120
+    end
+    if obj.is_a?(Item3)
+      vanish
     end
   end
 
