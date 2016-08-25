@@ -1,8 +1,8 @@
-require_relative 'character'
+﻿require_relative 'character'
 
-# 追ぁE��けてくるけど、対角線上では征E��伏せする敵�E�緑！E
+# 追ぁE��けてくるけど、対角線上では征E��伏せする敵�E�緑！E
 class Enemy < Character
-  UPDATE_THRESHOLD = 60 # 60フレームごとに移動すめE
+  UPDATE_THRESHOLD = 60 # 60フレームごとに移動する
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy.png"))
@@ -13,11 +13,13 @@ class Enemy < Character
   end
 
   def update
-    if @count < @update_threshold
+    if @count < @update_threshold * $item_time
       @count += 1
       return
     end
     @count = 0
+
+    item_time_judg
 
     move
   end
@@ -33,8 +35,8 @@ class Enemy < Character
 
   private
 
-  # X軸とY軸でプレイヤーと距離が遠ぁE��をしらべて、E
-  # そ�E軸優先でプレイヤーの方向に移動する、E
+  # X軸とY軸でプレイヤーと距離が遠い方をしらべて、
+  # その軸優先でプレイヤーの方向に移動する。
   def move
     map = Director.instance.map
     player = Director.instance.player

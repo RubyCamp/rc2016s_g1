@@ -1,4 +1,4 @@
-require_relative 'character'
+﻿require_relative 'character'
 
 # 最短経路で近づいてくる敵（赤）
 class Enemy2 < Character
@@ -12,12 +12,12 @@ class Enemy2 < Character
   end
 
   def update
-    if @count < UPDATE_THRESHOLD
+    if @count < UPDATE_THRESHOLD * $item_time
       @count += 1
       return
     end
     @count = 0
-
+    item_time_judg
     move
   end
  def hit(obj)

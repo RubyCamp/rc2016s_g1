@@ -1,4 +1,4 @@
-require_relative 'character'
+﻿require_relative 'character'
 
 # ランダムに徘徊する敵（B）
 class Enemy4 < Character
@@ -14,12 +14,12 @@ class Enemy4 < Character
   end
 
   def update
-    if @count < UPDATE_THRESHOLD
+    if @count < UPDATE_THRESHOLD * $item_time
       @count += 1
       return
     end
     @count = 0
-
+    item_time_judg
     update_dest
     move
   end

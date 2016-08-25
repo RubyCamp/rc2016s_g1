@@ -1,4 +1,4 @@
-require_relative 'character'
+﻿require_relative 'character'
 
 class Player < Character
   attr_reader :life, :score
@@ -9,6 +9,8 @@ class Player < Character
     super(1, 1, image)
     @life = 3
     @score = 0
+    $item_time = 1
+    $item_get_time = 0
   end
 
   def update
@@ -23,6 +25,8 @@ class Player < Character
   # コインを取ったとぁE
   def shot(obj)
     @score += 1
+    $item_time = 3
+    $item_get_time = Time.now
   end
 
   # 敵に当たったとぁE
