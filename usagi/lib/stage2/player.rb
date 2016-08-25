@@ -9,13 +9,12 @@ class Player < Character
     super(3, 2, image)
     @life = 3
     @score = 0
-    @button = 0
     $item_time = 1
     $item_get_time = 0
   end
 
   def update
-    map = Stage1::Director.instance.map
+    map = Stage2::Director.instance.map
     dy = -1 if Input.key_push?(K_UP) && map.movable?(@cell_x, @cell_y-1)
     dy = 1  if Input.key_push?(K_DOWN) && map.movable?(@cell_x, @cell_y+1)
     dx = 1  if Input.key_push?(K_RIGHT) && map.movable?(@cell_x+1, @cell_y)
@@ -42,10 +41,4 @@ class Player < Character
     self.x = @cell_x * @image.width
     self.y = @cell_y * @image.height
   end
-
-  # ボタンを踏んだ時
-  def stamp(obj)
-    @button = 1
-  end
-
 end
