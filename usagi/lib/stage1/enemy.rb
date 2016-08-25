@@ -35,8 +35,15 @@ class Enemy < Character
   def move
     map = Stage1::Director.instance.map
     player = Stage1::Director.instance.player
-    player_dx = player.cell_x - @cell_x
-    player_dy = player.cell_y - @cell_y
+
+#    if item4flg == 0
+      p_x = player.cell_x
+      p_y = player.cell_y
+#    end
+
+    player_dx = p_x - @cell_x
+    player_dy = p_y - @cell_y
+
     if player_dx.abs > player_dy.abs
       dx = player_dx / player_dx.abs
         move_cell(dx: dx)

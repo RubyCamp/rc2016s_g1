@@ -29,16 +29,10 @@ class Enemy2 < Character
   private
 
   def move
-    map = Stage1::Director.instance.map
-    player = Stage1::Director.instance.player
-
-#    if item4flg == 0
-      p_x = player.cell_x
-      p_y = player.cell_y
-#    end
-
+    map = Stage2::Director.instance.map
+    player = Stage2::Director.instance.player
     start = [@cell_x, @cell_y]
-    goal = [p_x, p_y]
+    goal = [player.cell_x, player.cell_y]
     route = map.calc_route(start, goal)
     dest = route[1]
     if dest
