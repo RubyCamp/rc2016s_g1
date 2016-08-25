@@ -1,4 +1,4 @@
-class Character < Sprite
+﻿class Character < Sprite
   attr_reader :cell_x, :cell_y
 
   def initialize(cell_x, cell_y, image)
@@ -46,5 +46,13 @@ class Character < Sprite
 
   def image_path(filename)
     return File.join(File.dirname(__FILE__), "..", "images", filename)
+  end
+
+  def item_time_judg #アイテムの効果時間判定
+    time_x = (Time.now - $Item_start_time).to_i	# @の意味を確認するべし
+    if time_x > 2
+	$Item_time = 1
+	p "aaaaa"
+    end
   end
 end
