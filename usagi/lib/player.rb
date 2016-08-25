@@ -13,19 +13,19 @@ class Player < Character
 
   def update
     map = Director.instance.map
-    dy = -1 if Input.key_push?(K_UP) && map.movable?(@cell_x, @cell_y-1)
-    dy = 1  if Input.key_push?(K_DOWN) && map.movable?(@cell_x, @cell_y+1)
-    dx = 1  if Input.key_push?(K_RIGHT) && map.movable?(@cell_x+1, @cell_y)
-    dx = -1 if Input.key_push?(K_LEFT) && map.movable?(@cell_x-1, @cell_y)
+    dy = -1 if Input.key_down?(K_UP) && map.movable?(@cell_x, @cell_y-1)
+    dy = 1  if Input.key_down?(K_DOWN) && map.movable?(@cell_x, @cell_y+1)
+    dx = 1  if Input.key_down?(K_RIGHT) && map.movable?(@cell_x+1, @cell_y)
+    dx = -1 if Input.key_down?(K_LEFT) && map.movable?(@cell_x-1, @cell_y)
     move_cell(dx: dx, dy: dy)
   end
 
-  # コインを取ったとき
+  # コインを取ったとぁE
   def shot(obj)
     @score += 1
   end
 
-  # 敵に当たったとき
+  # 敵に当たったとぁE
   def attacked(obj)
     @life -= 1
     if @life < 1

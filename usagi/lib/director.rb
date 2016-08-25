@@ -55,6 +55,7 @@ class Director
     @map.draw
     @info_window.draw
     Sprite.check(@coins, @enemies)
+    Sprite.check(@enemys,@item3)
     Sprite.draw(@characters)
   end
 

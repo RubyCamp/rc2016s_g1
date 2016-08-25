@@ -1,8 +1,8 @@
 require_relative 'character'
 
-# 追いかけてくるけど、対角線上では待ち伏せする敵（緑）
+# 追ぁE��けてくるけど、対角線上では征E��伏せする敵�E�緑！E
 class Enemy < Character
-  UPDATE_THRESHOLD = 60 # 60フレームごとに移動する
+  UPDATE_THRESHOLD = 60 # 60フレームごとに移動すめE
 
   def initialize(cell_x, cell_y)
     image = Image.load(image_path("enemy.png"))
@@ -26,12 +26,15 @@ class Enemy < Character
     if obj.is_a?(Coin)
       @update_threshold = 120
     end
+    if obj.is_a?(item3)
+      vanish
+    end
   end
 
   private
 
-  # X軸とY軸でプレイヤーと距離が遠い方をしらべて、
-  # その軸優先でプレイヤーの方向に移動する。
+  # X軸とY軸でプレイヤーと距離が遠ぁE��をしらべて、E
+  # そ�E軸優先でプレイヤーの方向に移動する、E
   def move
     map = Director.instance.map
     player = Director.instance.player

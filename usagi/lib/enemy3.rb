@@ -20,7 +20,11 @@ class Enemy3 < Character
 
     move
   end
-
+ def hit(obj)
+  if obj.is_a?(item3)
+    vanish
+  end
+ end
   private
 
   def move
