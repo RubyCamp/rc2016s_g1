@@ -6,6 +6,8 @@
     @cell_x = cell_x
     @cell_y = cell_y
     super(@cell_x * @image.width, @cell_y * @image.height, @image)
+    @item_time = 1
+    @item_get_time = 0
   end
 
   # 「キーワード引数」を使っています
@@ -42,6 +44,11 @@
 	end
   end
 
+  def slow
+   @item_time = 5
+   @item_get_time = Time.now
+  end
+
   private
 
   def image_path(filename)
@@ -49,9 +56,9 @@
   end
 
   def item_time_judg #アイテムの効果時間判定
-     time_x = (Time.now - $item_get_time).to_i 
-     if time_x > 1 
- 	$item_time = 1 
+     time_x = (Time.now - @item_get_time).to_i 
+     if time_x > 10
+ 	@item_time = 1 
      end 
   end
 end

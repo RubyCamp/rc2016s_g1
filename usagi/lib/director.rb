@@ -1,4 +1,4 @@
-require 'singleton'
+﻿require 'singleton'
 require_relative 'map'
 require_relative 'info_window'
 require_relative 'player'
@@ -8,6 +8,7 @@ require_relative 'enemy2'
 require_relative 'enemy3'
 require_relative 'enemy4'
 require_relative 'coin'
+require_relative 'enemy_stop_item'
 
 class Director
   include Singleton
@@ -23,7 +24,8 @@ class Director
     @info_window = InfoWindow.new(@map.height, @count)
     @characters = []
     @coins = []
-    1.times do
+    @enemy_stop_items = []
+    3.times do
       point = [rand(1..18), rand(1..13)]
       # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
       if !@map.movable?(*point) ||
@@ -31,6 +33,15 @@ class Director
         redo
       end
       @coins << Coin.new(*point)
+    end
+    3.times do
+      point = [rand(1..18), rand(1..13)]
+      # 移動不可能なマスか、すでにコインが配置されているマスの場合はやり直す
+      if !@map.movable?(*point) ||
+        @enemy_stop_items.any?{|enemy_stop_item| [enemy_stop_item.cell_x, enemy_stop_item.cell_y] == point}
+        redo
+      end
+      @enemy_stop_items << EnemyStopItem.new(*point)
     end
     @characters += @coins
     @enemies = []
@@ -41,6 +52,7 @@ class Director
     @characters += @enemies
     @player = Player.new
     @characters << @player
+    @characters += @enemy_stop_items
   end
 
   def play
@@ -50,12 +62,16 @@ class Director
       Sprite.update(@characters)
       Sprite.check(@enemies, @player, :hit, :attacked)
       Sprite.check(@player, @coins)
+      if Sprite.check(@player, @enemy_stop_items)
+        @enemies[0].slow
+      end
       compact
     end
 
     @map.draw
     @info_window.draw
     Sprite.check(@coins, @enemies)
+#    Sprite.check(@enemy_stop_items, @enemies)
     Sprite.check(@enemys,@item3)
     Sprite.draw(@characters)
   end
