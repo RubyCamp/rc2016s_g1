@@ -22,14 +22,14 @@ class Player < Character
     move_cell(dx: dx, dy: dy)
   end
 
-  # コインを取ったとぁE
+  # コインを取った時
   def shot(obj)
     @score += 1
-    $item_time = 3
+    $item_time = 5
     $item_get_time = Time.now
   end
 
-  # 敵に当たったとぁE
+  # 敵に当たった時
   def attacked(obj)
     @life -= 1
     if @life < 1
