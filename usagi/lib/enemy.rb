@@ -13,11 +13,12 @@ class Enemy < Character
   end
 
   def update
-    if @count < @update_threshold * $Item_time
+    if @count < @update_threshold * $item_time
       @count += 1
       return
     end
     @count = 0
+
     item_time_judg
 
     move

@@ -14,7 +14,7 @@ class Enemy4 < Character
   end
 
   def update
-    if @count < UPDATE_THRESHOLD * $Item_time
+    if @count < UPDATE_THRESHOLD * $item_time
       @count += 1
       return
     end
