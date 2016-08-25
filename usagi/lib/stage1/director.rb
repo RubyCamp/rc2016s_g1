@@ -8,6 +8,7 @@ require_relative 'enemy3'
 require_relative 'enemy4'
 require_relative 'coin'
 require_relative 'item3'
+require_relative 'button'
 
 module Stage1
 class Director
@@ -40,9 +41,17 @@ class Director
     @enemies << Enemy2.new(12,3)
     @enemies << Enemy3.new(13,3)
     @enemies << Enemy4.new(14,3)
+
+    @buttons = []
+    @buttons << Button.new(13,13,0)
+    @buttons << Button.new(14,13,1)
+    @buttons << Button.new(15,13,2)
+    @buttons << Button.new(16,13,3)
+
     @characters += @enemies
     @player = Player.new
     @characters << @player
+    @characters += @buttons
   end
 
   def play
@@ -59,6 +68,7 @@ class Director
     @info_window.draw
     Sprite.check(@coins, @enemies)
     Sprite.check(@enemys,@item3)
+    Sprite.check(@player, @buttons)
     Sprite.draw(@characters)
   end
 
@@ -75,6 +85,7 @@ class Director
   # ・すべてのコインを取る
   def game_over?
     return @count <= 0 || @player.life <= 0 || @coins.empty?
+
   end
 
   def compact
